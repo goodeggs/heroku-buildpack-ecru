@@ -9,6 +9,9 @@ build_dir=$1
 cache_dir=$2
 env_dir=$3
 
+# for sourcing .profile.d files below
+export HOME=$build_dir
+
 # Ensure the .profile.d directory exists
 mkdir -p $build_dir/.profile.d
 
@@ -30,7 +33,7 @@ pushd $build_dir/vendor/heroku-toolbelt
 curl -s https://s3.amazonaws.com/assets.heroku.com/heroku-client/heroku-client.tgz | tar xz --strip-components=1
 popd
 cat > $build_dir/.profile.d/heroku-toolbelt.sh <<-EOF
-export PATH="$build_dir/vendor/heroku-toolbelt/bin:\$PATH"
+export PATH="\$HOME/vendor/heroku-toolbelt/bin:\$PATH"
 EOF
 
 # Source it now so we can use heroku!
