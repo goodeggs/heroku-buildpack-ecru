@@ -27,7 +27,7 @@ gem install dpl
 echo "installing Heroku Toolbelt"
 mkdir -p $build_dir/vendor/heroku-toolbelt
 pushd $build_dir/vendor/heroku-toolbelt
-curl -s https://s3.amazonaws.com/assets.heroku.com/heroku-client/heroku-client.tgz | tar xz
+curl -s https://s3.amazonaws.com/assets.heroku.com/heroku-client/heroku-client.tgz | tar xz --strip-components=1
 popd
 cat > $build_dir/.profile.d/heroku-toolbelt.sh <<-EOF
 export PATH="$build_dir/vendor/heroku-toolbelt/bin:\$PATH"
