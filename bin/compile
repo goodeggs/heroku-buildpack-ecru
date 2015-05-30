@@ -27,6 +27,10 @@ EOF
 echo "installing dpl"
 gem install --no-wrappers --no-document dpl
 
+# Rewrite dpl symlink
+RELATIVE_LINK=`python -c "import os.path; print os.path.relpath('$(readlink $build_dir/vendor/ruby_gems/bin/dpl)', '$build_dir/vendor/ruby_gems/bin')"`
+ln -sf $RELATIVE_LINK $build_dir/vendor/ruby_gems/bin/dpl
+
 echo "installing Heroku Toolbelt"
 mkdir -p $build_dir/vendor/heroku-toolbelt
 pushd $build_dir/vendor/heroku-toolbelt
