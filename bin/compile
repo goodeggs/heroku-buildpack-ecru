@@ -25,7 +25,7 @@ EOF
 . $build_dir/.profile.d/ruby.sh
 
 echo "installing dpl"
-gem install --no-wrappers --no-document dpl
+gem install --no-wrappers --no-rdoc --no-ri dpl
 
 # Rewrite dpl symlink
 RELATIVE_LINK=`python -c "import os.path; print os.path.relpath('$(readlink $build_dir/vendor/ruby_gems/bin/dpl)', '$build_dir/vendor/ruby_gems/bin')"`
