@@ -46,4 +46,14 @@ EOF
 echo "installing heroku-exit-status plugin"
 heroku plugins:install https://github.com/goodeggs/heroku-exit-status
 
+echo "installing convox"
+mkdir -p $build_dir/vendor/convox
+pushd $build_dir/vendor/convox
+curl -Ls https://www.convox.com/downloads/linux/convox.zip > /tmp/convox.zip
+unzip /tmp/convox.zip
+popd
+cat > $build_dir/.profile.d/convox.sh <<-EOF
+export PATH="\$HOME/vendor/convox:\$PATH"
+EOF
+
 exit 0
