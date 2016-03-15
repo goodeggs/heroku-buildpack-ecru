@@ -46,14 +46,14 @@ EOF
 echo "installing heroku-exit-status plugin"
 heroku plugins:install https://github.com/goodeggs/heroku-exit-status
 
-echo "installing convox"
-mkdir -p $build_dir/vendor/convox
-pushd $build_dir/vendor/convox
-curl -Ls https://install.convox.com/linux.zip > /tmp/convox.zip
-unzip /tmp/convox.zip
+version="${RANCH_VERSION-2.0.0}"
+echo "installing ranch ${version}"
+mkdir -p $build_dir/vendor/ranch
+pushd $build_dir/vendor/ranch
+curl -Ls https://github.com/goodeggs/platform/releases/download/v${version}/ranch_${version}_linux_amd64.tar.gz | tar xz --strip 1
 popd
-cat > $build_dir/.profile.d/convox.sh <<-EOF
-export PATH="\$HOME/vendor/convox:\$PATH"
+cat > $build_dir/.profile.d/ranch.sh <<-EOF
+export PATH="\$HOME/vendor/ranch:\$PATH"
 EOF
 
 exit 0
