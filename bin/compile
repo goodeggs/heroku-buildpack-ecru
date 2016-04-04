@@ -59,8 +59,5 @@ EOF
 version="${NVM_VERSION-0.31.0}"
 echo "installing nvm ${version}"
 git clone --branch v${version} --depth 1 https://github.com/creationix/nvm.git $build_dir/vendor/nvm
-cat > $build_dir/.profile.d/nvm.sh <<-EOF
-. \$HOME/vendor/nvm/nvm.sh
-EOF
 
 exit 0
