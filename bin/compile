@@ -56,4 +56,8 @@ cat > $build_dir/.profile.d/ranch.sh <<-EOF
 export PATH="\$HOME/vendor/ranch:\$PATH"
 EOF
 
+version="${NVM_VERSION-0.31.0}"
+echo "installing nvm ${version}"
+git clone --branch v${version} --depth 1 https://github.com/creationix/nvm.git $build_dir/vendor/nvm
+
 exit 0
