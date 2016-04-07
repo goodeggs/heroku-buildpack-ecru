@@ -46,7 +46,7 @@ EOF
 echo "installing heroku-exit-status plugin"
 heroku plugins:install https://github.com/goodeggs/heroku-exit-status
 
-version="${RANCH_VERSION-2.1.0}"
+version="${RANCH_VERSION-2.2.0}"
 echo "installing ranch ${version}"
 mkdir -p $build_dir/vendor/ranch
 pushd $build_dir/vendor/ranch
