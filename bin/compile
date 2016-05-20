@@ -60,4 +60,7 @@ version="${NVM_VERSION-0.31.0}"
 echo "installing nvm ${version}"
 git clone --branch v${version} --depth 1 https://github.com/creationix/nvm.git $build_dir/vendor/nvm
 
+# remove node-gyp cache b/c it screws up future builds
+rm -rf $build_dir/.node-gyp
+
 exit 0
