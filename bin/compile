@@ -43,6 +43,9 @@ EOF
 # Source it now so we can use heroku!
 . $build_dir/.profile.d/heroku-toolbelt.sh
 
+# make sure we have the latest
+heroku update
+
 echo "installing heroku-exit-status plugin"
 heroku plugins:install https://github.com/goodeggs/heroku-exit-status
 
