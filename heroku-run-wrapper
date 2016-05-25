@@ -1,0 +1,11 @@
+#!/bin/sh -e
+# a heroku CLI wrapper so we can force `heroku run` to always use `--exit-code`
+
+heroku=$HOME/vendor/heroku-toolbelt/bin/heroku
+cmd="$1"; shift
+
+if [ "$cmd" == "run" ] && ( ! echo "$@" | grep -- "--exit-code" 2>&1 >/dev/null ); then
+  exec $heroku run --exit-code "$@"
+fi
+
+exec $heroku $cmd "$@"

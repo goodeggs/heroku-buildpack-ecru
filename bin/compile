@@ -5,6 +5,7 @@ set -o pipefail   # don't ignore exit codes when piping output
 # set -x          # enable debugging
 
 # Configure directories
+buildpack_dir=$PWD
 build_dir=$1
 cache_dir=$2
 env_dir=$3
@@ -36,18 +37,20 @@ mkdir -p $build_dir/vendor/heroku-toolbelt
 pushd $build_dir/vendor/heroku-toolbelt
 curl -s https://s3.amazonaws.com/assets.heroku.com/heroku-client/heroku-client.tgz | tar xz --strip-components=1
 popd
-cat > $build_dir/.profile.d/heroku-toolbelt.sh <<-EOF
-export PATH="\$HOME/vendor/heroku-toolbelt/bin:\$PATH"
+
+echo "installing heroku-run-wrapper for proper exit codes"
+mkdir -p $build_dir/vendor/heroku-run-wrapper/bin
+install $buildpack_dir/heroku-run-wrapper $build_dir/vendor/heroku-run-wrapper/bin/heroku
+
+cat > $build_dir/.profile.d/heroku-run-wrapper.sh <<-EOF
+export PATH="\$HOME/vendor/heroku-run-wrapper/bin:\$PATH"
 EOF
 
 # Source it now so we can use heroku!
-. $build_dir/.profile.d/heroku-toolbelt.sh
+. $build_dir/.profile.d/heroku-run-wrapper.sh
 
 # make sure we have the latest
 heroku update
-
-echo "installing heroku-exit-status plugin"
-heroku plugins:install https://github.com/goodeggs/heroku-exit-status
 
 version="${RANCH_VERSION-2.6.0}"
 echo "installing ranch ${version}"
