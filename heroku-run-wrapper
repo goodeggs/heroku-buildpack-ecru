@@ -9,8 +9,7 @@ heroku=$HOME/vendor/heroku-toolbelt/bin/heroku
 if [[ $# -gt 0 ]]; then
   cmd="$1"; shift
 
-  if [[ "$cmd" == "run" ]] && ( ! echo "$@" | grep -- "--exit-code" 2>&1 >/dev/nn
-ull ); then
+  if [[ "$cmd" == "run" ]] && ( ! echo "$@" | grep -- "--exit-code" 2>&1 >/dev/null ); then
     exec $heroku run --exit-code "$@"
   fi
 fi
