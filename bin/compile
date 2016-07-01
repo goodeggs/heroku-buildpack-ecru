@@ -52,7 +52,7 @@ EOF
 # make sure we have the latest
 heroku update
 
-version="${RANCH_VERSION-4.1.0}"
+version="${RANCH_VERSION-4.1.1}"
 echo "installing ranch ${version}"
 mkdir -p $build_dir/vendor/ranch
 pushd $build_dir/vendor/ranch
